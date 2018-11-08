@@ -8,7 +8,7 @@ public class Driver{
 
     System.out.println("---Testing addWordHorizontal---");
     System.out.println("testing add YES horizontally to row 2, column 0: should return true");
-    System.out.println(first.addWordHorizontal("YES", 2, 0));
+    //System.out.println(first.addWordHorizontal("YES", 2, 0));
     System.out.println("word search should be modified:");
     System.out.println(first.toString());
     System.out.println("\ntesting add NO horizontally to row 1, column 3: should return true");
