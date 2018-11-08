@@ -53,17 +53,16 @@ public class WordSearch{
      */
     public boolean addWordHorizontal(String word,int row, int col){
     if (word.length() > data[row].length - col) return false;
-    int c = 0;
-    for (int i = col; i < word.length(); i++){
-      if (data[row][i] != word.charAt(c) && data[row][i] != '_'){
+    int col2 = col;
+    for (int i = 0; i < word.length(); i++){
+      if (data[row][col2] != '_' && data[row][col2] != word.charAt(i)){
         return false;
       }
-      c++;
+      col2++;
     }
-    int j = 0;
-    for (int i = col; i < word.length(); i++){
-      data[row][i] = word.charAt(j);
-      j++;
+    for (int i = 0; i < word.length(); i++){
+      data[row][col] = word.charAt(i);
+      col++;
     }
     return true;
     }
