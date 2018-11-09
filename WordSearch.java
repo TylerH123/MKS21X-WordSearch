@@ -1,5 +1,8 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 public class WordSearch{
   private char[][]data;
 
@@ -21,19 +24,19 @@ public class WordSearch{
   private ArrayList<String>wordsAdded;
 
   public WordSearch(int rows, int cols, String filename){
-      if(cols < 0 || rows < 0)
-        throw new IllegalArgumentException("No");
-
-      data = new char[rows][cols];
-      this.clear();
+    if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
+    data = new char[rows][cols];
+    this.clear();
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
-      if(cols < 0 || rows < 0)
-        throw new IllegalArgumentException("No");
-
-      data = new char[rows][cols];
-      this.clear();
+    if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
+    data = new char[rows][cols];
+    this.clear();
   }
+  public
+  File f = new File(filename);
+  Scanner file = new Scanner(f);
+  while ()
 
     /**Set all values in the WordSearch to underscores'_'*/
   private void clear(){
