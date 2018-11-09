@@ -2,7 +2,7 @@ public class Driver3{
 
   public static void main(String[] args) {
 
-    WordSearch WSe = new WordSearch(6,10);
+    WordSearch WSe = new WordSearch(6,10, "xxx");
 
     System.out.println("WordSearch WSe = new WordSearch(6,10)");
     System.out.println(WSe);
