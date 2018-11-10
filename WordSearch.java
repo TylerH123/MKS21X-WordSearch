@@ -18,19 +18,20 @@ public class WordSearch{
   private Random randgen;
 
       //all words from a text file get added to wordsToAdd, indicating that they have not yet been added
-  private ArrayList<String>wordsToAdd;
+  private ArrayList<String>wordsToAdd = new ArrayList<>();
 
       //all words that were successfully added get moved into wordsAdded.
-  private ArrayList<String>wordsAdded;
+  private ArrayList<String>wordsAdded = new ArrayList<>();
 
   public WordSearch(int rows, int cols, String filename){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
     randgen = new Random();
-    File f = new File(filename);
-    Scanner file = new Scanner(f);
-    while (file.hasNext()){
-      wordsToAdd.add(file.next());
+    try{
+      getWords(filename);
+    }
+    catch(FileNotFoundException e){
+      System.out.println("File not found");
     }
     this.clear();
   }
@@ -38,12 +39,20 @@ public class WordSearch{
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
     randgen = new Random(randSeed);
+    try{
+      getWords(filename);
+    }
+    catch(FileNotFoundException e){
+      System.out.println("File not found");
+    }
+    this.clear();
+  }
+  private void getWords(String filename) throws FileNotFoundException{
     File f = new File(filename);
     Scanner file = new Scanner(f);
     while (file.hasNext()){
       wordsToAdd.add(file.next());
     }
-    this.clear();
   }
     /**Set all values in the WordSearch to underscores'_'*/
   private void clear(){
@@ -69,13 +78,19 @@ public class WordSearch{
     String output = "|";
     for (int i = 0; i < data.length; i++){
       for (int j = 0; j < data[i].length; j++){
-        output += data[i][j] + " ";
+        if (j == data[i].length - 1){
+          output += data[i][j];
+        }
+        else{
+          output += data[i][j] + " ";
+        }
       }
       output += "|\n|";
     }
+    output = output.substring(0, output.length() - 1);
     output += "\nWords: ";
-    for (int i = 0; i < wordsToAdd.size(); i++){
-      output += wordsToAdd.get(i) + " ";
+    for (int i = 0; i < wordsAdded.size(); i++){
+      output += wordsAdded.get(i) + " ";
     }
     return output;
   }
