@@ -26,6 +26,7 @@ public class WordSearch{
   public WordSearch(int rows, int cols, String filename){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
+    randgen = new Random();
     File f = new File(filename);
     Scanner file = new Scanner(f);
     while (file.hasNext()){
@@ -36,6 +37,7 @@ public class WordSearch{
   public WordSearch(int rows, int cols, String filename, int randSeed){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
+    randgen = new Random(randSeed);
     File f = new File(filename);
     Scanner file = new Scanner(f);
     while (file.hasNext()){
@@ -52,7 +54,9 @@ public class WordSearch{
     }
   }
   private boolean addWord(int r, int c, String word, int rowIncrement, int colIncrement){
-    return true;
+    if (rowIncrement == 0 && colIncrement == 0) return false;
+
+    return false;
   }
   private boolean addAllWords(){
     return false;
@@ -73,7 +77,7 @@ public class WordSearch{
     for (int i = 0; i < wordsToAdd.size(); i++){
       output += wordsToAdd.get(i) + " ";
     }
-    return output.substring(0,output.length()-1);
+    return output;
   }
 
     /**Attempts to add a given word to the specified position of the WordGrid.
