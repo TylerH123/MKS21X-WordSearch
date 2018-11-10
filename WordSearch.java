@@ -26,18 +26,23 @@ public class WordSearch{
   public WordSearch(int rows, int cols, String filename){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
+    File f = new File(filename);
+    Scanner file = new Scanner(f);
+    while (file.hasNext()){
+      wordsToAdd.add(file.next());
+    }
     this.clear();
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
     data = new char[rows][cols];
+    File f = new File(filename);
+    Scanner file = new Scanner(f);
+    while (file.hasNext()){
+      wordsToAdd.add(file.next());
+    }
     this.clear();
   }
-  public
-  File f = new File(filename);
-  Scanner file = new Scanner(f);
-  while ()
-
     /**Set all values in the WordSearch to underscores'_'*/
   private void clear(){
     for(int i = 0; i < data.length; i++){
@@ -46,8 +51,12 @@ public class WordSearch{
       }
     }
   }
-
-
+  private boolean addWord(int r, int c, String word, int rowIncrement, int colIncrement){
+    return true;
+  }
+  private boolean addAllWords(){
+    return false;
+  }
     /**Each row is a new line, there is a space between each letter
      *@return a String with each character separated by spaces, and rows
      *separated by newlines.
@@ -59,6 +68,10 @@ public class WordSearch{
         output += data[i][j] + " ";
       }
       output += "|\n|";
+    }
+    output += "\nWords: ";
+    for (int i = 0; i < wordsToAdd.size(); i++){
+      output += wordsToAdd.get(i) + " ";
     }
     return output.substring(0,output.length()-1);
   }
