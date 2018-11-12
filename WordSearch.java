@@ -64,8 +64,12 @@ public class WordSearch{
   }
   private boolean addWord(int r, int c, String word, int rowIncrement, int colIncrement){
     if (rowIncrement == 0 && colIncrement == 0) return false;
-    if (word.length() > )
-
+    if (rowIncrement == -1 && word.length() > data.length - (data[r].length - c)) return false;
+    if (colIncrement == -1 && word.length() > data.length - (data.length - r)) return false;
+    if (rowIncrement == 1 && word.length() > data[r].length - c) return false;
+    if (colIncrement == 1 && word.length() > data.length - r) return false;
+    int r2 = r;
+    int c2 = c;
     return false;
   }
   private boolean addAllWords(){
