@@ -70,6 +70,18 @@ public class WordSearch{
     if (colIncrement == 1 && word.length() > data.length - r) return false;
     int r2 = r;
     int c2 = c;
+    for (int i = 0; i < word.length(); i++){
+      if (data[r2][c2] != '_' && data[r2][c2] != word.charAt(i)){
+        return false;
+      }
+      c2 += colIncrement;
+      r2 += rowIncrement;
+    }
+    for (int i = 0; i < word.length(); i++){
+      data[r][c] = word.charAt(i);
+      c += colIncrement;
+      r += rowIncrement;
+    }
     return false;
   }
   private boolean addAllWords(){
