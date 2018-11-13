@@ -82,9 +82,13 @@ public class WordSearch{
       c += colIncrement;
       r += rowIncrement;
     }
-    return false;
+    wordsAdded.add(word);
+    return true;
   }
   private boolean addAllWords(){
+    for (int i = 0; i < wordsToAdd.size(); i++){
+      addWord(1, 1, wordsToAdd.get(i), 1, 1);
+    }
     return false;
   }
     /**Each row is a new line, there is a space between each letter
