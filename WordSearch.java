@@ -24,9 +24,10 @@ public class WordSearch{
   private ArrayList<String>wordsAdded = new ArrayList<>();
 
   public WordSearch(int rows, int cols, String filename){
-    if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
+    if(cols < 0 || rows < 0) throw new IllegalArgumentException();
     data = new char[rows][cols];
-    randgen = new Random();
+    int seed = (int)(Math.random() * 100000);
+    randgen = new Random(seed);
     try{
       getWords(filename);
     }
@@ -36,7 +37,7 @@ public class WordSearch{
     this.clear();
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
-    if(cols < 0 || rows < 0) throw new IllegalArgumentException("No");
+    if(cols < 0 || rows < 0) throw new IllegalArgumentException();
     data = new char[rows][cols];
     randgen = new Random(randSeed);
     try{
@@ -83,11 +84,12 @@ public class WordSearch{
       r += rowIncrement;
     }
     wordsAdded.add(word);
+    wordsToAdd.remove(word);
     return true;
   }
   private boolean addAllWords(){
     for (int i = 0; i < wordsToAdd.size(); i++){
-      addWord(1, 1, wordsToAdd.get(i), 1, 1);
+      addWord(1, 1, wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()), 1, 1);
     }
     return false;
   }
@@ -127,7 +129,7 @@ public class WordSearch{
      * or there are overlapping letters that do not match, then false is returned
      * and the board is NOT modified.
      */
-  public boolean addWordHorizontal(String word,int row, int col){
+  /*public boolean addWordHorizontal(String word,int row, int col){
     if (word.length() > data[row].length - col) return false;
     int col2 = col;
     for (int i = 0; i < word.length(); i++){
@@ -154,7 +156,7 @@ public class WordSearch{
       *or there are overlapping letters that do not match, then false is returned.
       *and the board is NOT modified.
       */
-  public boolean addWordVertical(String word,int row, int col){
+  /*public boolean addWordVertical(String word,int row, int col){
     if (word.length() > data.length - row) return false;
     int row2 = row;
     for (int i = 0; i < word.length(); i++){
@@ -186,5 +188,5 @@ public class WordSearch{
       col++;
     }
     return true;
-  }
+  }*/
 }
