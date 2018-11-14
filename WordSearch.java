@@ -26,7 +26,7 @@ public class WordSearch{
   public WordSearch(int rows, int cols, String filename){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException();
     data = new char[rows][cols];
-    int seed = (int)(Math.random() * 100000);
+    seed = (int)(Math.random() * 100000);
     randgen = new Random(seed);
     try{
       getWords(filename);
@@ -91,8 +91,8 @@ public class WordSearch{
     return true;
   }
   private boolean addAllWords(){
-    int rowInc = randgen.nextInt();
-    int colInc = randgen.nextInt();
+    int rowInc = randgen.nextInt() % 2;
+    int colInc = randgen.nextInt() % 2;
     int randWordPos;
     int xcor = 0;
     int ycor = 0;
@@ -105,6 +105,14 @@ public class WordSearch{
         }
         else{
           addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
+        }
+        xcor += randgen.nextInt() % 2;
+        ycor += randgen.nextInt() % 2;
+        if (xcor < 0){
+          xcor = randgen.nextInt() % 2;
+        }
+        if (ycor < 0){
+          ycor = randgen.nextInt() % 2;
         }
       }
     }
