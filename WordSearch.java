@@ -93,11 +93,18 @@ public class WordSearch{
   private boolean addAllWords(){
     int rowInc = randgen.nextInt() % 2;
     int colInc = randgen.nextInt() % 2;
-    int randWordPos;
+    int randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
     int xcor = 0;
     int ycor = 0;
     for (int i = 0; i < wordsToAdd.size(); i++){
-      randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
+      xcor += randgen.nextInt() % 2;
+      ycor += randgen.nextInt() % 2;
+      while (xcor < 0){
+        xcor += Math.abs(randgen.nextInt() % 2);
+      }
+      while (xcor > data.length){
+        xcor -= Math.abs(randgen.nextInt() % 2);
+      }
       for (int tries = 0; tries < 20; tries++){
         if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
           rowInc = randgen.nextInt() % 2;
@@ -105,14 +112,7 @@ public class WordSearch{
         }
         else{
           addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
-        }
-        xcor += randgen.nextInt() % 2;
-        ycor += randgen.nextInt() % 2;
-        if (xcor < 0){
-          xcor = randgen.nextInt() % 2;
-        }
-        if (ycor < 0){
-          ycor = randgen.nextInt() % 2;
+          randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
         }
       }
     }
