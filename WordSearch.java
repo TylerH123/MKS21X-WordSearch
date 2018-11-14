@@ -35,13 +35,13 @@ public class WordSearch{
       System.out.println("File not found");
     }
     this.clear();
-    System.out.println("This is the seed to the current layout: " + seed);
     addAllWords();
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException();
     data = new char[rows][cols];
-    randgen = new Random(randSeed);
+    seed = randSeed;
+    randgen = new Random(seed);
     try{
       getWords(filename);
     }
@@ -91,9 +91,21 @@ public class WordSearch{
     return true;
   }
   private boolean addAllWords(){
+    int rowInc = randgen.nextInt();
+    int colInc = randgen.nextInt();
+    int randWordPos;
+    int xcor = 0;
+    int ycor = 0;
     for (int i = 0; i < wordsToAdd.size(); i++){
-      for (int tries = 0; tries < 1000; tries++){
-        addWord(1, 1, wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size())), randgen.nextInt() % 2, randgen.nextInt() % 2);
+      randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
+      for (int tries = 0; tries < 20; tries++){
+        if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
+          rowInc = randgen.nextInt() % 2;
+          colInc = randgen.nextInt() % 2;
+        }
+        else{
+          addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
+        }
       }
     }
     return true;
@@ -120,7 +132,7 @@ public class WordSearch{
     for (int i = 0; i < wordsAdded.size(); i++){
       output += wordsAdded.get(i) + " ";
     }
-    return output;
+    return output += " (seed: " + seed + ")";
   }
 
     /**Attempts to add a given word to the specified position of the WordGrid.
