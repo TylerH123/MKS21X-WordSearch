@@ -6,7 +6,7 @@ public class driver4{
   public static void main(String[] args){
     try{
       if (args.length > 0){
-        
+
         if (args.length == 3){
           System.out.println("Row Length: " + args[0] + ", Column Length: " + args[1] + "\n" + "File: " + args[2]);
           WordSearch p = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]);
@@ -18,8 +18,10 @@ public class driver4{
         //  WordSearch p = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(argss[3]), args[4]);
         //}
       }
-      WordSearch p = new WordSearch(10,10, "words.txt");
-      System.out.println(p.toString());
+      else{
+        System.out.println("No arguments passed, used default values: 10, 10, words.txt");
+        WordSearch p = new WordSearch(10,10, "words.txt");
+      }
     }
     catch(IllegalArgumentException e){
       System.out.println("Row or Column cannot be 0");

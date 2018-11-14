@@ -35,6 +35,7 @@ public class WordSearch{
       System.out.println("File not found");
     }
     this.clear();
+    System.out.println("This is the seed to the current layout: " + seed);
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException();
@@ -89,9 +90,11 @@ public class WordSearch{
   }
   private boolean addAllWords(){
     for (int i = 0; i < wordsToAdd.size(); i++){
-      addWord(1, 1, wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()), 1, 1);
+      for (int tries = 0; tries < 20; tries++){
+        addWord(1, 1, wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()), randgen.nextInt() % 2, randgen.nextInt() % 2);
+      }
     }
-    return false;
+    return true;
   }
     /**Each row is a new line, there is a space between each letter
      *@return a String with each character separated by spaces, and rows
