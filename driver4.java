@@ -20,7 +20,8 @@ public class driver4{
       }
       else{
         System.out.println("No arguments passed, used default values: 10, 10, words.txt");
-        WordSearch p = new WordSearch(10,10, "words.txt");
+        WordSearch p = new WordSearch(10,10, "words.txt", 69884);
+        System.out.println(p.toString());
       }
     }
     catch(IllegalArgumentException e){

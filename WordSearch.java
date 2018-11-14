@@ -36,6 +36,7 @@ public class WordSearch{
     }
     this.clear();
     System.out.println("This is the seed to the current layout: " + seed);
+    addAllWords();
   }
   public WordSearch(int rows, int cols, String filename, int randSeed){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException();
@@ -48,6 +49,7 @@ public class WordSearch{
       System.out.println("File not found");
     }
     this.clear();
+    addAllWords();
   }
   private void getWords(String filename) throws FileNotFoundException{
     File f = new File(filename);
@@ -90,8 +92,8 @@ public class WordSearch{
   }
   private boolean addAllWords(){
     for (int i = 0; i < wordsToAdd.size(); i++){
-      for (int tries = 0; tries < 20; tries++){
-        addWord(1, 1, wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()), randgen.nextInt() % 2, randgen.nextInt() % 2);
+      for (int tries = 0; tries < 1000; tries++){
+        addWord(1, 1, wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size())), randgen.nextInt() % 2, randgen.nextInt() % 2);
       }
     }
     return true;
