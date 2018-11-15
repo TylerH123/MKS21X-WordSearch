@@ -100,10 +100,14 @@ public class WordSearch{
     for (int i = 0; i < wordsToAdd.size(); i++){
       xcor = Math.abs(randgen.nextInt() % data.length);
       ycor = Math.abs(randgen.nextInt() % data[xcor].length);
+      while (xcor == 0 && ycor == 0){
+        xcor = Math.abs(randgen.nextInt() % data.length);
+        ycor = Math.abs(randgen.nextInt() % data[xcor].length);
+      }
       randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
       boolean added = false;
       int tries = 0;
-      while (tries < 20 || added == false){
+      while (tries < 20 && added == false){
         if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
           rowInc = randgen.nextInt() % 2;
           colInc = randgen.nextInt() % 2;
