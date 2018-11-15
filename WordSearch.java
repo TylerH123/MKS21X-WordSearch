@@ -38,8 +38,9 @@ public class WordSearch{
     }
     this.clear();
     addAllWords();
+    fillInWordSearch();
   }
-  public WordSearch(int rows, int cols, String filename, int randSeed){
+  public WordSearch(int rows, int cols, String filename, int randSeed, boolean ans){
     if(cols < 0 || rows < 0) throw new IllegalArgumentException();
     data = new char[rows][cols];
     seed = randSeed;
@@ -52,6 +53,9 @@ public class WordSearch{
     }
     this.clear();
     addAllWords();
+    if (!ans){
+      fillInWordSearch();
+    }
   }
   private void getWords(String filename) throws FileNotFoundException{
     File f = new File(filename);
@@ -124,9 +128,9 @@ public class WordSearch{
   }
   private void fillInWordSearch(){
     String alpha = "abcdefghijklmnopqrstuvwxyz";
-    char randChar = alpha.charAt(randgen.nextInt() % 26);
     for (int i = 0; i < data.length; i++){
       for (int j = 0; j < data[i].length; j++){
+        char randChar = alpha.charAt(Math.abs(randgen.nextInt() % 26));
         if (data[i][j] == '_'){
           data[i][j] = randChar;
         }
