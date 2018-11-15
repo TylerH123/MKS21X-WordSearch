@@ -56,6 +56,9 @@ public class WordSearch{
     if (!ans){
       fillInWordSearch();
     }
+    if (ans){
+      answerKey();
+    }
   }
   private void getWords(String filename) throws FileNotFoundException{
     File f = new File(filename);
@@ -133,6 +136,15 @@ public class WordSearch{
         char randChar = alpha.charAt(Math.abs(randgen.nextInt() % 26));
         if (data[i][j] == '_'){
           data[i][j] = randChar;
+        }
+      }
+    }
+  }
+  private void answerKey(){
+    for (int i = 0; i < data.length; i++){
+      for (int j = 0; j < data[i].length; j++){
+        if (data[i][j] == '_'){
+          data[i][j] = ' ';
         }
       }
     }
