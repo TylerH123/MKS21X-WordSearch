@@ -122,6 +122,17 @@ public class WordSearch{
     }
     return true;
   }
+  private void fillInWordSearch(){
+    String alpha = "abcdefghijklmnopqrstuvwxyz";
+    char randChar = alpha.charAt(randgen.nextInt() % 26);
+    for (int i = 0; i < data.length; i++){
+      for (int j = 0; j < data[i].length; j++){
+        if (data[i][j] == '_'){
+          data[i][j] = randChar;
+        }
+      }
+    }
+  }
     /**Each row is a new line, there is a space between each letter
      *@return a String with each character separated by spaces, and rows
      *separated by newlines.
