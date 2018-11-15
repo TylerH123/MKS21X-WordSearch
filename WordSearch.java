@@ -101,15 +101,18 @@ public class WordSearch{
       xcor = Math.abs(randgen.nextInt() % data.length);
       ycor = Math.abs(randgen.nextInt() % data[xcor].length);
       randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
-      for (int tries = 0; tries < 20; tries++){
+      boolean added = false;
+      int tries = 0;
+      while (tries < 20 || added == false){
         if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
           rowInc = randgen.nextInt() % 2;
           colInc = randgen.nextInt() % 2;
         }
         else{
           addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
-          tries += 20;
+          added = true;
         }
+        tries++;
       }
     }
     return true;
