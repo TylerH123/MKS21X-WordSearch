@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Collection;
+
 public class WordSearch{
   private char[][]data;
 
@@ -100,21 +102,20 @@ public class WordSearch{
     for (int i = 0; i < wordsToAdd.size(); i++){
       xcor = Math.abs(randgen.nextInt() % data.length);
       ycor = Math.abs(randgen.nextInt() % data[xcor].length);
-      while (xcor == 0 && ycor == 0){
-        xcor = Math.abs(randgen.nextInt() % data.length);
-        ycor = Math.abs(randgen.nextInt() % data[xcor].length);
+      while (rowInc == 0 && colInc == 0){
+        rowInc = randgen.nextInt() % 2;
+        colInc = randgen.nextInt() % 2;
       }
       randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
       boolean added = false;
       int tries = 0;
       while (tries < 20 && added == false){
-        if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
-          rowInc = randgen.nextInt() % 2;
-          colInc = randgen.nextInt() % 2;
+        if (added = addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
+          added = true;
         }
         else{
-          addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
-          added = true;
+          rowInc = randgen.nextInt() % 2;
+          colInc = randgen.nextInt() % 2;
         }
         tries++;
       }
