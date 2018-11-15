@@ -68,18 +68,19 @@ public class WordSearch{
   }
   private boolean addWord(int r, int c, String word, int rowIncrement, int colIncrement){
     if (rowIncrement == 0 && colIncrement == 0) return false;
-    if (rowIncrement == -1 && word.length() > data.length - (data[r].length - c)) return false;
-    if (colIncrement == -1 && word.length() > data.length - (data.length - r)) return false;
-    if (rowIncrement == 1 && word.length() > data[r].length - c) return false;
-    if (colIncrement == 1 && word.length() > data.length - r) return false;
-    int r2 = r;
-    int c2 = c;
-    for (int i = 0; i < word.length(); i++){
-      if (data[r2][c2] != '_' && data[r2][c2] != word.charAt(i)){
-        return false;
+    try{
+      int r2 = r;
+      int c2 = c;
+      for (int i = 0; i < word.length(); i++){
+        if (data[r2][c2] != '_' && data[r2][c2] != word.charAt(i)){
+          return false;
+        }
+        c2 += colIncrement;
+        r2 += rowIncrement;
       }
-      c2 += colIncrement;
-      r2 += rowIncrement;
+    }
+    catch (ArrayIndexOutOfBoundsException e){
+      return false;
     }
     for (int i = 0; i < word.length(); i++){
       data[r][c] = word.charAt(i);
@@ -93,18 +94,13 @@ public class WordSearch{
   private boolean addAllWords(){
     int rowInc = randgen.nextInt() % 2;
     int colInc = randgen.nextInt() % 2;
-    int randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
-    int xcor = 0;
-    int ycor = 0;
+    int randWordPos;
+    int xcor;
+    int ycor;
     for (int i = 0; i < wordsToAdd.size(); i++){
-      xcor += randgen.nextInt() % 2;
-      ycor += randgen.nextInt() % 2;
-      while (xcor < 0){
-        xcor += Math.abs(randgen.nextInt() % 2);
-      }
-      while (xcor > data.length){
-        xcor -= Math.abs(randgen.nextInt() % 2);
-      }
+      xcor = Math.abs(randgen.nextInt() % data.length);
+      ycor = Math.abs(randgen.nextInt() % data[xcor].length);
+      randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
       for (int tries = 0; tries < 20; tries++){
         if (!addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
           rowInc = randgen.nextInt() % 2;
@@ -112,7 +108,7 @@ public class WordSearch{
         }
         else{
           addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc);
-          randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
+          tries += 20;
         }
       }
     }
