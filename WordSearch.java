@@ -1,9 +1,5 @@
-import java.util.Random;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.Collection;
+import java.util.*;
+import java.io.*;
 
 public class WordSearch{
   private char[][]data;
@@ -103,9 +99,9 @@ public class WordSearch{
   private boolean addAllWords(){
     int rowInc = randgen.nextInt() % 2;
     int colInc = randgen.nextInt() % 2;
-    int randWordPos;
     int xcor;
     int ycor;
+    Collections.shuffle(wordsToAdd, randgen);
     for (int i = 0; i < wordsToAdd.size(); i++){
       xcor = Math.abs(randgen.nextInt() % data.length);
       ycor = Math.abs(randgen.nextInt() % data[xcor].length);
@@ -113,11 +109,10 @@ public class WordSearch{
         rowInc = randgen.nextInt() % 2;
         colInc = randgen.nextInt() % 2;
       }
-      randWordPos = Math.abs(randgen.nextInt() % wordsToAdd.size());
       boolean added = false;
       int tries = 0;
       while (tries < 20 && added == false){
-        if (added = addWord(xcor, ycor, wordsToAdd.get(randWordPos), rowInc, colInc)){
+        if (added = addWord(xcor, ycor, wordsToAdd.get(i), rowInc, colInc)){
           added = true;
         }
         else{

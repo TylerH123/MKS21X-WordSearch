@@ -17,9 +17,14 @@ public class driver4{
           System.out.println(p.toString());
         }
         if (args.length == 5){
+          if (args[4].equals("true") || args[4].equals("false")){
             System.out.println("Row Length: " + args[0] + ", Column Length: " + args[1] + "\nFile: " + args[2] + "\nAnswer key: " + args[4]);
             WordSearch p = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), Boolean.parseBoolean(args[4]));
             System.out.println(p.toString());
+          }
+          else{
+            System.out.println("Please only use true or false for the fifth argument");
+          }
         }
       }
       else{
