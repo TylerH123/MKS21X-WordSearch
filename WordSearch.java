@@ -256,7 +256,7 @@ public class WordSearch{
       if (data[row2][col] != '_' && data[row2][col] != word.charAt(i)){
         return false;
       }
-      row2++;
+      row++;
     }
     for (int i = 0; i < word.length(); i++){
       data[row][col] = word.charAt(i);
